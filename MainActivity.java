@@ -1,43 +1,64 @@
-package com.shadiya.addtwonum;
+package com.shadiya.alertbox;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
 import android.view.View.OnClickListener;
 
+
 public class MainActivity extends Activity {
 	
-	EditText t1,t2;
 	Button b;
-	TextView res;
-	int num1,num2,sum;
-	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        t1=(EditText)findViewById(R.id.editText1);
-        t2=(EditText)findViewById(R.id.editText2);
+        
         b=(Button)findViewById(R.id.button1);
-        res=(TextView)findViewById(R.id.textView1);
         b.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
 				
-					num1=Integer.parseInt(t1.getText().toString());
-					num2=Integer.parseInt(t2.getText().toString());
-					sum=num1+num2;
+				builder.setMessage("Do you want to save user name and password");
+				builder.setTitle("Alert...!");
+				builder.setCancelable(false);
+				
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					
-					res.setText("Result:" +sum);
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						finish();
+					}
+				});
+				
+				builder.setNegativeButton("cancel",new  DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+						arg0.cancel();
+					}
+				});
+				
+				AlertDialog alert= builder.create();
+				alert.show();
+				
 				
 			}
 		});
     }
+    
+   
 
 
     @Override
